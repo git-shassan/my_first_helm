@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded,hook-failed
+  name: postinstall-hook-to-run-after-deployment
+  namespace: {{ $.Values.namespace }}
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - |
+          echo I AM HERE
+        image: busybox
+        name: testob
+      restartPolicy: Never

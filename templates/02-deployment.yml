@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: argotesting
+  name: argotesting
+  namespace: {{ $.Values.namespace }}
+spec:
+  replicas: {{ $.Values.replicas }}
+  selector:
+    matchLabels:
+      app: argotesting
+  strategy: {}
+  template:
+    metadata:
+      namespace: {{ $.Values.namespace }}
+      labels:
+        app: argotesting
+    spec:
+      serviceAccountName: temp-priv-account
+      containers:
+      - image: quay.io/sfhassan/basictools
+        name: basictools

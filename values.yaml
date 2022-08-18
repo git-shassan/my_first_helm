@@ -1,0 +1,2 @@
+replicas: 4
+namespace: helm-test-1 
